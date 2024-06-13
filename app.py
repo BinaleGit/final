@@ -7,10 +7,13 @@ CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 
 @app.route('/api/stock/<symbol>', methods=['GET'])
 def get_stock_data(symbol):
+    symbol = symbol.upper()  # Ensure the symbol is in uppercase
+    
+
     try:
         stock = yf.Ticker(symbol)
         hist = stock.history(period="1mo", interval="1d")
-
+        
         if hist.empty:
             print(f"No data found for symbol {symbol}")
             return jsonify({"error": f"No data found for symbol {symbol}"}), 404

@@ -8,9 +8,15 @@ const StockData = () => {
   const [stockData, setStockData] = useState(null);
   const [error, setError] = useState(null);
 
+
   const fetchStockData = async () => {
+    const upperSymbol = symbol.toUpperCase();
+
+    
+
     try {
-      const response = await axios.get(`http://localhost:5000/api/stock/${symbol.toUpperCase()}`);
+      const response = await axios.get(`http://localhost:5000/api/stock/${upperSymbol}`);
+      console.log('Fetched data:', response.data); // Debugging statement
       setStockData(response.data);
       setError(null);
     } catch (error) {
