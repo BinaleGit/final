@@ -1,0 +1,76 @@
+.stock-input {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.suggestions {
+  border: 1px solid #2e2d2d;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 5px;
+  background-color: #e4dada;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  background-color: #3c3b3b;
+}
+
+.suggestion-item:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.suggestion-symbol {
+  font-weight: bold;
+}
+
+.suggestion-name {
+  font-style: italic;
+  color: #666;
+}
+
+.more-button {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  width: 100%;
+  text-align: center;
+}
+
+.error {
+  color: red;
+}
+
+.stock-table {
+  margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #d00707;
+}
+
+.stock-table th, .stock-table td {
+  border: 1px solid #970404;
+  padding: 8px;
+  text-align: left;
+}
+
+.stock-table th {
+  background-color: #c90606;
+  color: #fff;
+}
+
+.stock-table td {
+  background-color: #373434;
+  color: #ffffff;
+}
