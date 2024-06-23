@@ -11,14 +11,27 @@ ALL_STOCKS = []
 
 def fetch_all_stock_symbols():
     global ALL_STOCKS
-    # Download the list of S&P 500 companies as a starting point
-    url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-    table = pd.read_html(url, header=0)
-    sp500_df = table[0]
-    ALL_STOCKS = sp500_df[['Symbol', 'Security']].to_dict(orient='records')
-    # Adding other well-known indices or lists can be done similarly
+    url_sp500 = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+    url_tase = "https://en.wikipedia.org/wiki/TA-125_Index"
+    
+    # Fetch S&P 500 companies
+    sp500_table = pd.read_html(url_sp500, header=0)
+    sp500_df = sp500_table[0]
+    sp500_stocks = sp500_df[['Symbol', 'Security']].to_dict(orient='records')
+
+    # Fetch Tel Aviv Stock Exchange companies
+    tase_table = pd.read_html(url_tase, header=0)
+    tase_df = tase_table[1]  # The second table in the page contains the required data
+
+    tase_stocks = tase_df[['Symbol', 'Name']].to_dict(orient='records')
+
+    # Combine the stocks from both exchanges
+    ALL_STOCKS = sp500_stocks # need to add tase_stocks
 
 fetch_all_stock_symbols()
+print(ALL_STOCKS)
+
+
 
 
 @app.route('/api/stock/<symbol>', methods=['GET'])
@@ -58,6 +71,10 @@ def get_suggestions(input):
         if input in stock['Symbol'] or input in stock['Security'].upper()
     ][:5]
     return jsonify(matching_suggestions)
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
